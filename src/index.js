@@ -27,8 +27,6 @@ const chart = lightningChart({
     })
     .setTitle(`LiDAR Point Cloud`)
 
-const legend = chart.addLegendBox()
-
 // Setup static axis intervals.
 chart
     .getDefaultAxisX()
@@ -129,8 +127,6 @@ loadBinaryLidarFile('buildings.bin', false).then((series) => {
             fillStyle: new SolidFill({ color: ColorRGBA(220, 220, 220) }),
         }),
     )
-
-    legend.add(series)
 })
 
 loadBinaryLidarFile('green.bin', true).then((series) => {
@@ -140,6 +136,5 @@ loadBinaryLidarFile('green.bin', true).then((series) => {
             fillStyle: new IndividualPointFill(),
         }),
     )
-
-    legend.add(series)
+    chart.legend.setEntryOptions(series, {markerFillStyle: new SolidFill({ color: ColorRGBA(0, 64, 0)})})
 })
