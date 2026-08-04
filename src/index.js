@@ -118,9 +118,8 @@ const loadBinaryLidarFile = async (assetName, isColored) => {
     const series = chart
         .addPointSeries({
             type: PointSeriesTypes3D.Pixelated,
-            individualPointColorEnabled: isColored,
         })
-        .add(dataPoints)
+        .appendJSON(dataPoints)
 
     totalPointsCount += pointsCount
     chart.setTitle(`LiDAR Point Cloud | ${totalPointsCount} data points`)
@@ -132,7 +131,7 @@ loadBinaryLidarFile('buildings.bin', false).then((series) => {
     series.setName('Buildings').setPointStyle(
         new PointStyle3D.Pixelated({
             size: 1,
-            fillStyle: new SolidFill({ color: chart.getTheme().isDark ? lightGrey : darkGrey  }),
+            fillStyle: new SolidFill({ color: chart.getTheme().isDark ? lightGrey : darkGrey }),
         }),
     )
 })
@@ -144,5 +143,5 @@ loadBinaryLidarFile('green.bin', true).then((series) => {
             fillStyle: new IndividualPointFill(),
         }),
     )
-    chart.legend.setEntryOptions(series, {markerFillStyle: new SolidFill({ color: ColorRGBA(0, 64, 0)})})
+    chart.legend.setEntryOptions(series, { markerFillStyle: new SolidFill({ color: ColorRGBA(0, 64, 0) }) })
 })
